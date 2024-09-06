@@ -12,8 +12,9 @@ class HTMLNode:
         raise NotImplementedError
 
     def props_to_html(self):
-        props_formatted_string = " "
+        props_formatted_string = ""
+
         for attr, value in self.props.items():
-            props_formatted_string += f'{attr}="{value}" '
+            props_formatted_string += f' {attr}="{value}"'
 
         return props_formatted_string

@@ -62,5 +62,5 @@ class TestHTMLNode(unittest.TestCase):
         node = HTMLNode("tag", "value", "chidren", node_attr)
         print(node.props_to_html())
         self.assertEqual(
-            node.props_to_html(), ' href="https://www.google.com" target="_blank" '
+            node.props_to_html(), ' href="https://www.google.com" target="_blank"'
         )
