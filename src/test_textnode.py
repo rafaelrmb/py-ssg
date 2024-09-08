@@ -1,5 +1,6 @@
 import unittest
 
+from leafnode import LeafNode
 from textnode import TextNode
 
 
@@ -34,6 +35,28 @@ class TestTextNode(unittest.TestCase):
     def test_non_empty_url_attr(self):
         node_with_url = TextNode("This is a text node", "bold", "urlhere")
         self.assertIsNotNone(node_with_url.url)
+
+    def test_text_to_html_no_props(self):
+        node = TextNode("This is a text node", "bold")
+
+        self.assertEqual(
+            node.text_node_to_html_node().__repr__(),
+            LeafNode("This is a text node", "b").__repr__(),
+        )
+
+    def test_text_to_html_with_props(self):
+        node_with_url = TextNode("This is a text node", "link", "fakeurl.com")
+
+        self.assertEqual(
+            node_with_url.text_node_to_html_node().__repr__(),
+            LeafNode("This is a text node", "a", {"href": "fakeurl.com"}).__repr__(),
+        )
+
+    def test_text_to_html_invalid_text_type(self):
+        node_with_url = TextNode("This is a text node", "wrong")
+
+        with self.assertRaises(ValueError):
+            node_with_url.text_node_to_html_node()
 
 
 if __name__ == "__main__":
