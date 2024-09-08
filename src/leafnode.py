@@ -8,7 +8,7 @@ class LeafNode(HTMLNode):
     def to_html(self):
         props_string = ""
 
-        if self.value is None or self.value == "":
+        if self.value is None:
             raise ValueError
 
         if self.tag is None or self.tag == "":
