@@ -50,3 +50,18 @@ class TextNode:
             )
 
         return LeafNode(text_node.text, self.types_dict[text_node.text_type])
+
+    def split_nodes_by_delimiter(self, old_nodes, delimiter, text_type):
+        new_nodes = []
+        for node in old_nodes:
+            if node.text_type != "text":
+                new_nodes.append(node)
+            else:
+                split_nodes = node.text.split(delimiter)
+
+                for index, text in enumerate(split_nodes):
+                    if text:
+                        new_text_type = text_type if index % 2 == 1 else "text"
+                        new_nodes.append(TextNode(text, new_text_type))
+
+        return new_nodes
